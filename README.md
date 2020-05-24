@@ -1,6 +1,6 @@
 ![icon](./icon.png) 
 
-## Fix Etecsa - Extensión del Chrome
+# Fix Etecsa - Extensión del Chrome
 
 ## Descripción
 
