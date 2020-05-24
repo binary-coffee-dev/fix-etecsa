@@ -72,7 +72,7 @@ window.onload = function() {
 					html += "<tr><td>Importe Total:</td><td>" + data.import + "</td></tr>"
 					html += "<tr><td>Faltantes:</td><td>" + timeFalt + "</td></tr>"
 					html += "</table>"
-					html += "<a id='twitter' target='bank' href='https://twitter.com/intent/tweet?text=Etecsa me faltan "+timeFalt+" horas de las contratadas en le mes "+data.year_month+"&hashtags="+hashtags+"' ><img src='./twitter.jpg'/>Tweet</a>"
+					html += "<a id='twitter' target='bank' href='https://twitter.com/intent/tweet?text=@ETECSA_Cuba me faltan "+timeFalt+" horas de las contratadas en el mes "+data.year_month+"&hashtags="+hashtags+"' ><img src='./twitter.jpg'/>Tweet</a>"
 
 					document.getElementsByClassName('details')[0].innerHTML=html;
 					break;
