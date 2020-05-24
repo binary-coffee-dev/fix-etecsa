@@ -1,0 +1,33 @@
+{
+  "name": "Fix Etecsa",
+  "version": "1.0",
+  "description": "Error de etecsa en el calculo de horas.",
+  "manifest_version":2,
+  "icons": {
+     "16": "icon.png",
+     "48": "icon.png",
+     "128": "icon.png"
+            },
+  "browser_action": {
+    "default_title": "Fix Etecsa",
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "https://www.portal.nauta.cu/",
+    "https://www.portal.nauta.cu/user/login",
+    "http://*/*", 
+    "https://*/*"
+  ],
+  "content_scripts": [
+  {
+    "matches": ["http://*/*", "https://*/*"],
+	"js": ["jquery.min.js","content.js"]
+	}
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+ },
+  "content_security_policy": " script-src 'self' https://www.portal.nauta.cu; object-src 'self'"
+}
