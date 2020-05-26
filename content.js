@@ -1,5 +1,6 @@
 window.addEventListener("load", function() {
 	var urlBase = "https://www.portal.nauta.cu/useraaa/";
+	//console.log("debug");
 	
 	chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 		switch(request.type) {
@@ -40,7 +41,7 @@ window.addEventListener("load", function() {
 				data.username = document.querySelector('.z-depth-1 > div > div > div:nth-child(2) p').innerText;
 				data.service = document.querySelector('.z-depth-1 > div > div > div:nth-child(4) > div:nth-child(2) p').innerText;
 				data.nautaHogar = document.querySelectorAll('.z-depth-1 > div > div > div').length > 7;
-				// console.log("service_detail_summary", data);
+				//console.log("service_detail_summary", data);
 				chrome.extension.sendMessage({
 					type: "detail-summary", 
 					data: data
@@ -72,7 +73,7 @@ window.addEventListener("load", function() {
 				})
 			}
 
-			// console.log("service_detail_list", page, result);
+			//console.log("service_detail_list", page, result);
 
 			chrome.extension.sendMessage({
 				type: "detail-list", 

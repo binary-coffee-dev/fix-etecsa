@@ -37,15 +37,23 @@ window.onload = function() {
 			case "detail-summary":
 				data = JSON.parse(JSON.stringify(request.data));
 
-				chrome.tabs.getSelected(null, function(tab){
-					chrome.tabs.sendMessage(tab.id, {type: "get-detail-list", 
-						data:{ 
-							year_month:data.year_month,
-							count:data.count,
-							page:1
-						} 
+				if( data.count == 0 ){
+					let html = '<h4>Detalles:</h4>';
+					html += '<p>No hay conexiones en este mes.</p>';
+					document.getElementsByClassName('details')[0].innerHTML=html;
+					removeLoading();
+				}else{
+					chrome.tabs.getSelected(null, function(tab){
+						chrome.tabs.sendMessage(tab.id, {type: "get-detail-list", 
+							data:{ 
+								year_month:data.year_month,
+								count:data.count,
+								page:1
+							} 
+						});
 					});
-				});
+				}
+				
 			break;
 			case "detail-list":
 				if( !data.list )
@@ -63,16 +71,17 @@ window.onload = function() {
 					let hashtags = "EtecsaDevuelvemeLasHoras,BajenLosPreciosDeInternet"
 
 					let html = '<h4>Detalles:</h4><table>';
-					html += "<tr><td>Mes:</td><td>" + data.year_month + "</td></tr>"
-					html += "<tr><td>Conexiones:</td><td>" + data.count + "</td></tr>"
-					html += "<tr><td>Subida:</td><td>" + data.upstream_traffic/1000000 + "GB</td></tr>"
-					html += "<tr><td>Descarga:</td><td>" + data.download_traffic/1000000 + "GB</td></tr>"
-					// html += "<tr><td>Tráfico total:</td><td>" + data.total_traffic/1000000 + "GB</td></tr>"
-					html += "<tr><td>Tiempo total:</td><td>" + formatTime(data.duration) + "</td></tr>"
-					html += "<tr><td>Importe Total:</td><td>" + data.import + "</td></tr>"
-					html += "<tr><td>Faltantes:</td><td>" + timeFalt + "</td></tr>"
-					html += "</table>"
-					html += "<a id='twitter' target='bank' href='https://twitter.com/intent/tweet?text=@ETECSA_Cuba me faltan "+timeFalt+" horas de las contratadas en el mes "+data.year_month+"&hashtags="+hashtags+"' ><img src='./twitter.jpg'/>Tweet</a>"
+					html += "<tr><td>Mes:</td><td>" + data.year_month + "</td></tr>";
+					html += "<tr><td>Conexiones:</td><td>" + data.count + "</td></tr>";
+					html += "<tr><td>Subida:</td><td>" + data.upstream_traffic/1000000 + "GB</td></tr>";
+					html += "<tr><td>Descarga:</td><td>" + data.download_traffic/1000000 + "GB</td></tr>";
+					// html += "<tr><td>Tráfico total:</td><td>" + data.total_traffic/1000000 + "GB</td></tr>";
+					html += "<tr><td>Tiempo total:</td><td>" + formatTime(data.duration) + "</td></tr>";
+					html += "<tr><td>Importe Total:</td><td>" + data.import + "</td></tr>";
+					html += "<tr><td>Faltantes:</td><td>" + timeFalt.time + "</td></tr>";
+					html += "<tr><td>Faltantes (CUC):</td><td>" + timeFalt.import + "</td></tr>";
+					html += "</table>";
+					html += "<a id='twitter' target='bank' href='https://twitter.com/intent/tweet?text=@ETECSA_Cuba me faltan "+timeFalt+" horas de las contratadas en el mes "+data.year_month+"&hashtags="+hashtags+"' ><img src='./twitter.jpg'/>Tweet</a>";
 
 					document.getElementsByClassName('details')[0].innerHTML=html;
 					break;
@@ -92,23 +101,51 @@ window.onload = function() {
 		return true;
 	});
 
+	var listPrice = [
+		{
+			time: 1588305600000,
+			price: 30
+		},
+		{
+			time: 9588305600000,
+			price: 1
+		},
+	]
+
+	function getMod(d){
+		let time = new Date(d.substr(6,4), d.substr(3,2)-1, d.substr(0,2))
+
+		for( let i = 0; i < listPrice.length; i ++ )
+			if( time < listPrice[i].time ){
+				return ( i == 0 )? 72 : (3600/listPrice[i-1].price).toFixed();
+			}
+
+		return 72;
+	}
+
 	function timeFaltantes(list){
-		let mod = 52;
-
-		if( data.nautaHogar && ( data.service.indexOf("International") != -1 || data.service.indexOf("Internacional") != -1 )  )
-			mod = 120;
-		else
-			if( data.service.indexOf("International") == -1 && data.service.indexOf("Internacional") == -1 )
-				mod = 360;
-
+		let mod;
 		let falt = 0;
 		for( let it of data.list ){
+			mod = 52;//4 de enero
+
+			if( data.nautaHogar && ( data.service.indexOf("International") != -1 || data.service.indexOf("Internacional") != -1 )  )
+				mod = getMod( it.in );
+			else
+				if( data.service.indexOf("International") == -1 && data.service.indexOf("Internacional") == -1 )
+					mod = 360;//antes 2020
+
 			let tmp = it.time.split(":");
 			let tim = tmp[0]*3600 + tmp[1]*60 + tmp[2]*1;
 			falt += (tim%mod == 0)? 0 : mod - tim%mod;
 		}
+
+		let t = falt/mod;
 		
-		return formatTime(falt);
+		return {
+			time:formatTime(falt),
+			import: t.toFixed() / 100
+		}
 	}
 
 
