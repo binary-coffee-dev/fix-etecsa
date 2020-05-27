@@ -2,6 +2,8 @@
 
 # Fix Etecsa - Extensión del Chrome
 
+[![Build Status](https://travis-ci.com/dcs-community/fix-etecsa.svg?branch=master)](https://travis-ci.com/dcs-community/fix-etecsa)
+
 ## Descripción
 
 Esta extensión en particular se utiliza para conocer la cantidad de horas de la cuenta nauta se te han descontado de más por errores de ETECSA. Las extensiones son archivos que se encuentran empaquetados en uno solo, los cuales el usuario descarga e instala. Este empaquetado a diferencia de las aplicaciones web normales, no necesita depender de contenido web.
@@ -44,4 +46,9 @@ ToDo
 - [crear-extensiones-google-chrome](http://www.maestrosdelweb.com/crear-extensiones-google-chrome/)
 - [developing-google-chrome-extensions](https://code.tutsplus.com/es/tutorials/developing-google-chrome-extensions--net-33076)
 - [Tweet button](https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button)
+- [Automate Chrome Extension Deployment](https://www.akinjide.me/2019/automate-chrome-extension-deployment/)
+- [Web Store Upload CLI](https://github.com/DrewML/chrome-webstore-upload-cli)
+- [How to generate Google API keys](https://github.com/DrewML/chrome-webstore-upload/blob/master/How%20to%20generate%20Google%20API%20keys.md)
+
+
 
