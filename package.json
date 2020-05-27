@@ -4,8 +4,7 @@
   "description": "![icon](./icon.png)",
   "main": "background.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-	"deploy": "webstore upload --auto-publish",
+	"deploy": "webstore upload --auto-publish"
   },
   "repository": {
     "type": "git",
