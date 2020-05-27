@@ -1,0 +1,24 @@
+{
+  "name": "fix-etecsa",
+  "version": "1.0.0",
+  "description": "![icon](./icon.png)",
+  "main": "background.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"deploy": "webstore upload --auto-publish",
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dcs-community/fix-etecsa.git"
+  },
+  "keywords": [],
+  "author": "dcs-community",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dcs-community/fix-etecsa/issues"
+  },
+  "homepage": "https://github.com/dcs-community/fix-etecsa#readme",
+  "devDependencies": {
+    "chrome-webstore-upload-cli": "^1.2.0"
+  }
+}
