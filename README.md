@@ -2,8 +2,6 @@
 
 # Fix Etecsa - Extensión del Chrome
 
-[![Build Status](https://travis-ci.com/dcs-community/fix-etecsa.svg?branch=master)](https://travis-ci.com/dcs-community/fix-etecsa)
-
 ## Descripción
 
 Esta extensión en particular se utiliza para conocer la cantidad de horas de la cuenta nauta se te han descontado de más por errores de ETECSA. Las extensiones son archivos que se encuentran empaquetados en uno solo, los cuales el usuario descarga e instala. Este empaquetado a diferencia de las aplicaciones web normales, no necesita depender de contenido web.
