@@ -2,6 +2,8 @@
 
 # Fix Etecsa - Extensión del Chrome
 
+[![Build Status](https://travis-ci.com/dcs-community/fix-etecsa.svg?branch=master)](https://travis-ci.com/dcs-community/fix-etecsa)
+
 Puedes ver un artículo mas detallado en https://binary-coffee.dev/post/fixetecsa-cuantas-horas-nautas-has-perdido-por-errores-de-etecsa.
 
 ## Descripción
